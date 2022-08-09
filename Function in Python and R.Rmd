@@ -1,0 +1,109 @@
+---
+title: "Functions in Python and R"
+author: "Sharon C. Makunura"
+date: "2022-08-05"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+In this article I describe how to define your own functions in both Python and R.  I find that the main difference in using functions for either of these programming languages lies mainly with the output, as I will demonstrate. 
+
+In case you didn't know, functions are reusable code that take input and produce output, are reusable and can be called multiple times.
+
+There are two main section to creating functions: i. defining the function and its arguments, and ii. specifying the actions of the function.  In this example the aim is to create a function that will double, half and square a number.
+
+## 1. Define a simple Python function
+
+A Python function follows the following format:
+
+**def** function_name(arguments):
+
+
+|         do something
+
+
+Working with our example to double, half and square a number the function looks looks as follows. 
+
+```{python define_function, echo=TRUE }
+def manipulate(x):
+  print("double is ",(x*2))
+  print("half is ",(x/2))
+  print("squared is ",(x*x))
+```
+
+The code above defines the function.  To use the function, we need to call the function as shown below:
+
+```{python}
+manipulate(5)
+```
+
+
+
+## 2. Define a simple R function  
+
+The format of a function in R is as follows:
+
+
+function_name <- **function** (arguments){
+
+
+|         do something
+|         **return** (output)
+
+}
+
+Again, working with the same example as above will give us the following function.  
+```{r}
+manipulateR <- function(x){
+  double <-x*2
+  halved <-x/2
+  squared <-x*x
+  
+  results<-list(double, halved, squared)
+  names(results)<- c("Doubled", "Halved", "Squared")
+  return(results)
+}
+```
+All functions need to be called to be able to use them.  
+
+```{r}
+manipulateR(5)
+```
+## 3. The difference 
+
+
+For the most part function in Python and R are constructed and used in a very similar manner. I used the print function for my Python output and a data frame for my R function.  The latter is necessitated by a unique characteristic of R - it can only return a single output.  This is unlike Python which supports multiple outputs as illustrated in the following example.
+
+First I will redefine the function so that instead of printing, each result is saved as an individual variable.  
+
+```{python new_function, echo = FALSE}
+def manipulate(x):
+  d =x*2
+  h=x/2
+  s=x*x
+  return(d,h,s)
+```
+When calling the function, the output is a list.
+
+```{python}
+manipulate(5)
+
+```
+The advantage of this structure of output is that each value can be independently assigned to variables as demonstrated below:
+
+```{python}
+x,y,z = manipulate(5)
+print("double is ",x)
+print("half is ",y)
+print("squared is ",z)
+```
+In R, only a single object can be the output from the function, for example a data frame as shown above.  Take a look at [this R project](https://github.com/SharonMakunura/Google-Data-Analytics-Capstone-Project/blob/39936c05faa52474df5e9e8921273dd22500b066/cyclistic-analysis-script.R) and [this Python project](https://github.com/SharonMakunura/WhatsApp-Data-Analysis-With-Python/blob/a4811e4e1023c3efb4c1720af382776ff63a4b0f/3.%20Analyzing%20Whatsapp%20Data.ipynb) to see how I implemented customized functions and different outputs.
+
+
+
+
